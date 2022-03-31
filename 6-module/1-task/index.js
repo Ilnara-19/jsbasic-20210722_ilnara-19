@@ -17,11 +17,11 @@ export default class UserTable {
     this.elem = document.createElement('table');
     this.rowsName = rows;
     this.render();
-    this.elem.addEventListener ('click', this.closeButton);
+    this.elem.addEventListener('click', this.closeButton);
   }
 
-  render(){
-    for( let i = 0; i < this.rowsName.length; i++){
+  render() {
+    for (let i = 0; i < this.rowsName.length; i++) {
       this.elem.insertAdjacentHTML('beforeend', `
         <tr>
           <td>${this.rowsName[i].name}</td>
@@ -35,7 +35,7 @@ export default class UserTable {
 
   closeButton(event) {
     let target = event.target;
-    if(target.dataset.name === 'remove-button') {
+    if (target.dataset.name === 'remove-button') {
       let tr = target.closest('tr'); 
       tr.remove();
     }

@@ -11,13 +11,13 @@ export default class Carousel {
     this.arrowControl();
     this.elem.querySelector('.carousel__arrow_right').addEventListener('click', () => this.carouselRight());
     this.elem.querySelector('.carousel__arrow_left').addEventListener('click', () => this.carouselLeft());
-    this.elem.addEventListener ('click', this.clickButtonCarousel);
-    this.elem.addEventListener('product-add', function(addProduct){
-        alert(addProduct.detail);
+    this.elem.addEventListener('click', this.clickButtonCarousel);
+    this.elem.addEventListener('product-add', function(addProduct) {
+      alert(addProduct.detail);
     });
   }
 
-  render(){
+  render() {
     this.elem = createElement(`
     <div class="carousel">
     <!--Кнопки переключения-->
@@ -34,7 +34,7 @@ export default class Carousel {
   }
 
   renderSlider() {
-    for(let i = 0; i < this.slides.length; i++) {
+    for (let i = 0; i < this.slides.length; i++) {
       this.carouselInner.insertAdjacentHTML('beforeEnd', `
       <!--Верстка 1-ого слайда-->
         <div class="carousel__slide" data-id="${this.slides[i].id}">
@@ -51,42 +51,42 @@ export default class Carousel {
   }
 
   arrowControl() {
-    if(this.countSlides == 1){
+    if (this.countSlides == 1) {
       this.elem.querySelector('.carousel__arrow_left').style.display = 'none';
     }
   }
 
-  carouselRight(){
-    this.widthSlider = this.widthSlider +  this.carouselInner.offsetWidth;
+  carouselRight() {
+    this.widthSlider = this.widthSlider + this.carouselInner.offsetWidth;
     this.carouselInner.style.transform = `translateX(${-this.widthSlider}px)`;
     this.countSlides += 1;
 
-    if(this.countSlides !== 1) {
+    if (this.countSlides !== 1) {
       this.elem.querySelector('.carousel__arrow_left').style.display = '';
     }
 
-    if(this.countSlides == this.slides.length){
+    if (this.countSlides == this.slides.length) {
       this.elem.querySelector('.carousel__arrow_right').style.display = 'none';
     }
   }
 
-  carouselLeft(){
-    this.widthSlider = this.widthSlider -  this.carouselInner.offsetWidth;
+  carouselLeft() {
+    this.widthSlider = this.widthSlider - this.carouselInner.offsetWidth;
     this.carouselInner.style.transform = `translateX(${-this.widthSlider}px)`;
     this.countSlides -= 1;
 
-    if(this.countSlides !== this.slides.length) {
+    if (this.countSlides !== this.slides.length) {
       this.elem.querySelector('.carousel__arrow_right').style.display = '';
     }
 
-    if(this.countSlides == 1) {
+    if (this.countSlides == 1) {
       this.elem.querySelector('.carousel__arrow_left').style.display = 'none';
     }
   }
 
-  clickButtonCarousel(event){
+  clickButtonCarousel(event) {
     let target = event.target;
-    if(target.closest('.carousel__button')) {
+    if (target.closest('.carousel__button')) {
       let atrID = target.closest('.carousel__slide').getAttribute('data-id'); 
       let addProduct = new CustomEvent('product-add', {detail: atrID, bubbles: true});
       this.dispatchEvent(addProduct);
