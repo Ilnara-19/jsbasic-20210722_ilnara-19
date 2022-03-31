@@ -70,20 +70,25 @@
     ]
 
     let cart = new Cart(cartIcon);
-
+    
     document.addEventListener('click', (event) => {
       let button = event.target.closest('.button');
+      
       if (!button) {
         return;
       }
-
+     
       let addProductId = button.dataset.addProductId;
       let productToAdd = products.find((product) => product.id === addProductId);
 
       if (productToAdd) {
         cart.addProduct(productToAdd);
+        console.log(cart.isEmpty());
+         cartIcon.update(cart);
       }
     })
+
+    
   </script>
 </body>
 

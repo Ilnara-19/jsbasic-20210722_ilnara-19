@@ -8,14 +8,14 @@ export default class ProductCard {
     button.addEventListener('click', () => this.clickButton());
     this.elem.addEventListener('product-add', function() {
       alert('ok');
-    })
+    });
   }
 
-  render(){
+  render() {
     this.elem = createElement(`
     <div class="card"> 
       <div class="card__top">
-        <img src="/assets/images/products/${this.product.image}"  class="card__image" alt="product">
+        <img src="/assets/images/products/${this.product.image}" class="card__image" alt="product">
         <span class="card__price">€${this.product.price.toFixed(2)}</span>
       </div>
       <div class="card__body">
@@ -27,7 +27,7 @@ export default class ProductCard {
     </div>`);
   }
 
-  clickButton(){
+  clickButton() {
     let addProduct = new CustomEvent('product-add', {detail: this.product.id, bubbles: true});
     this.elem.dispatchEvent(addProduct);
   }
